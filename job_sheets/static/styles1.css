@@ -1,0 +1,83 @@
+/* Global Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Container Styling */
+.container {
+    width: 60%;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header Styling */
+h1 {
+    text-align: center;
+    background-color: #003366;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Label Styling */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+/* Input Field Styling */
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* File Input Specific Margin */
+input[type="file"] {
+    margin-bottom: 15px;
+}
+
+/* Textarea Styling */
+textarea {
+    height: 80px;
+}
+
+/* Select Box Styling */
+select {
+    height: 40px;
+}
+
+/* Submit Button Styling */
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Submit Button Hover Effect */
+input[type="submit"]:hover {
+    background-color: #00509e;
+}

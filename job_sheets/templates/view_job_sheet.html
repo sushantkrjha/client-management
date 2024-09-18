@@ -5,32 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Job Sheet</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'styles2.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>VIEW JOB SHEET</h1>
 
-        <div class="job-sheet-details">
-            <p><strong>Client Name:</strong> {{ job_sheet.client_name }}</p>
-            <p><strong>Contact Info:</strong> {{ job_sheet.contact_info }}</p>
-            <p><strong>Received Date:</strong> {{ job_sheet.received_date }}</p>
-            <p><strong>Inventory Received:</strong> {{ job_sheet.inventory_received }}</p>
-            <p><strong>Reported Issues:</strong> {{ job_sheet.reported_issues }}</p>
-            <p><strong>Client Notes:</strong> {{ job_sheet.client_notes }}</p>
-            <p><strong>Assigned Technician:</strong> {{ job_sheet.assigned_technician }}</p>
-            <p><strong>Estimated Amount:</strong> {{ job_sheet.estimated_amount }}</p>
-            <p><strong>Deadline:</strong> {{ job_sheet.deadline }}</p>
-            <p><strong>Status:</strong> {{ job_sheet.get_status_display }}</p>
-            {% if job_sheet.upload %}
-            <p><strong>Uploaded File:</strong> <a href="{{ job_sheet.upload.url }}" target="_blank">View File</a></p>
-            {% endif %}
+        <table class="job-sheet-table">
+            <tr>
+                <td>Client Name:</td>
+                <td>{{ job_sheet.client_name }}</td>
+            </tr>
+            <tr>
+                <td>Contact Info:</td>
+                <td>{{ job_sheet.contact_info }}</td>
+            </tr>
+            <tr>
+                <td>Received Date:</td>
+                <td>{{ job_sheet.received_date }}</td>
+            </tr>
+            <tr>
+                <td>Inventory Received:</td>
+                <td>{{ job_sheet.inventory_received }}</td>
+            </tr>
+            <tr>
+                <td>Inventory Image/Document/Video:</td>
+                <td>
+                    {% if job_sheet.inventory_upload %}
+                    <a href="{{ job_sheet.inventory_upload.url }}" target="_blank">View File</a>
+                    {% else %}
+                    No file uploaded
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Reported Issues:</td>
+                <td>{{ job_sheet.reported_issues }}</td>
+            </tr>
+            <tr>
+                <td>Client Notes:</td>
+                <td>{{ job_sheet.client_notes }}</td>
+            </tr>
+            <tr>
+                <td>Assigned Technician:</td>
+                <td>{{ job_sheet.assigned_technician }}</td>
+            </tr>
+            <tr>
+                <td>Estimated Amount:</td>
+                <td>{{ job_sheet.estimated_amount }}</td>
+            </tr>
+            <tr>
+                <td>Deadline:</td>
+                <td>{{ job_sheet.deadline }}</td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>{{ job_sheet.get_status_display }}</td>
+            </tr>
+        </table>
+
+        <h2>Add or Update Note:</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Note</button>
+        </form>
+
+        <div class="edit-options">
+            <a href="{% url 'edit_job_sheet' job_sheet.pk %}">Edit</a>
+            <a href="{% url 'delete_job_sheet' job_sheet.pk %}">Delete</a>
+            <a href="{% url 'dashboard' %}">Back</a>
         </div>
 
-        <div class="form-buttons">
-            <a href="{% url 'edit_job_sheet' job_sheet.id %}" class="edit-btn">Edit</a>
-            <a href="{% url 'dashboard' %}" class="back-btn">Back to Dashboard</a>
-        </div>
+        <button class="pdf-btn">Save as PDF</button>
     </div>
 </body>
 </html>

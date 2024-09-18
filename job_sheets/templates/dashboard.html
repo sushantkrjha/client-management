@@ -1,0 +1,79 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Management Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HARDIK TRADERS - CLIENT MANAGEMENT DASHBOARD</h1>
+        </header>
+
+        <div class="search-bar">
+            <form method="get" action="{% url 'dashboard' %}">
+                <input type="text" name="search" placeholder="Search by Client Name or ID...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <a href="{% url 'create_job_sheet' %}" class="new-job-btn">New Job Sheet</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Client Id</th>
+                    <th>Client Name</th>
+                    <th>Contact Info</th>
+                    <th>Received Date</th>
+                    <th>Inventory Received</th>
+                    <th>Reported Issues</th>
+                    <th>Client Notes</th>
+                    <th>Assigned Technician</th>
+                    <th>Estimated Amount</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job_sheet in job_sheets %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ job_sheet.id }}</td>
+                    <td>{{ job_sheet.client_name }}</td>
+                    <td>{{ job_sheet.contact_info }}</td>
+                    <td>{{ job_sheet.received_date }}</td>
+                    <td>{{ job_sheet.inventory_received }}</td>
+                    <td>{{ job_sheet.reported_issues }}</td>
+                    <td>{{ job_sheet.client_notes }}</td>
+                    <td>{{ job_sheet.assigned_technician }}</td>
+                    <td>{{ job_sheet.estimated_amount }}</td>
+                    <td>{{ job_sheet.deadline }}</td>
+                    <td>{{ job_sheet.get_status_display }}</td>
+                    <td>
+                        <a href="{% url 'view_job_sheet' job_sheet.id %}" class="view-btn">View</a>
+                        <a href="{% url 'edit_job_sheet' job_sheet.id %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'delete_job_sheet' job_sheet.id %}" class="delete-btn">Delete</a>
+
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="13">No job sheets available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <footer>
+            <p>&copy; 2024 Hardik Traders</p>
+        </footer>
+    </div>
+</body>
+</html>

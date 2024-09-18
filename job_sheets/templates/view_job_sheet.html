@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Job Sheet</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>VIEW JOB SHEET</h1>
+
+        <div class="job-sheet-details">
+            <p><strong>Client Name:</strong> {{ job_sheet.client_name }}</p>
+            <p><strong>Contact Info:</strong> {{ job_sheet.contact_info }}</p>
+            <p><strong>Received Date:</strong> {{ job_sheet.received_date }}</p>
+            <p><strong>Inventory Received:</strong> {{ job_sheet.inventory_received }}</p>
+            <p><strong>Reported Issues:</strong> {{ job_sheet.reported_issues }}</p>
+            <p><strong>Client Notes:</strong> {{ job_sheet.client_notes }}</p>
+            <p><strong>Assigned Technician:</strong> {{ job_sheet.assigned_technician }}</p>
+            <p><strong>Estimated Amount:</strong> {{ job_sheet.estimated_amount }}</p>
+            <p><strong>Deadline:</strong> {{ job_sheet.deadline }}</p>
+            <p><strong>Status:</strong> {{ job_sheet.get_status_display }}</p>
+            {% if job_sheet.upload %}
+            <p><strong>Uploaded File:</strong> <a href="{{ job_sheet.upload.url }}" target="_blank">View File</a></p>
+            {% endif %}
+        </div>
+
+        <div class="form-buttons">
+            <a href="{% url 'edit_job_sheet' job_sheet.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'dashboard' %}" class="back-btn">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
